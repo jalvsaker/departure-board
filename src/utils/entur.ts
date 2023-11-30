@@ -44,8 +44,8 @@ export async function fetchDepartures(station: string) {
 
   const now = new Date();
 
-  const departures: departure[] = json.data.stopPlace.estimatedCalls.map(
-    (departure: any): departure => {
+  const departures: Departure[] = json.data.stopPlace.estimatedCalls.map(
+    (departure: any): Departure => {
       const departureTime = new Date(departure.expectedDepartureTime);
 
       const minutes = Math.floor(
@@ -67,7 +67,7 @@ export async function fetchDepartures(station: string) {
   };
 }
 
-export interface departure {
+export interface Departure {
   line: string;
   destination: string;
   departureTime: Date;
@@ -86,7 +86,7 @@ export async function stationSearch(
   );
 
   const json = await res.json();
-  const places: place[] = json.features.map((feature: any) => {
+  const places: Place[] = json.features.map((feature: any) => {
     return {
       id: feature.properties.id,
       name: feature.properties.label,
@@ -96,7 +96,7 @@ export async function stationSearch(
   return places;
 }
 
-export interface place {
+export interface Place {
   id: string;
   name: string;
 }

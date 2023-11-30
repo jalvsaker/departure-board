@@ -21,8 +21,7 @@ if (!station) {
   <h1>{station.name}</h1>
   <DepartureBoard
     station={stationId}
-    stationName={station?.name}
-    initialDepartures={station?.departures || []}
+    initialDepartures={station.departures}
     client:load
   />
 </Layout>

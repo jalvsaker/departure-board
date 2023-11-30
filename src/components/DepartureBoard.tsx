@@ -1,16 +1,14 @@
 import { useState, useEffect } from "react";
-import { fetchDepartures, type departure } from "../utils/entur";
+import { fetchDepartures, type Departure } from "../utils/entur";
 
 export function DepartureBoard({
   station,
-  stationName,
   initialDepartures,
 }: {
   station: string;
-  stationName: string;
-  initialDepartures: departure[];
+  initialDepartures: Departure[];
 }) {
-  const [departures, setDepartures] = useState<departure[]>(initialDepartures);
+  const [departures, setDepartures] = useState<Departure[]>(initialDepartures);
 
   async function fetchData() {
     const res = await fetchDepartures(station);
@@ -33,7 +31,7 @@ export function DepartureBoard({
           <li key={departure.line + departure.destination}>
             {departure.line} {departure.destination}
             {" - "}
-            {departure.minutes !== 0 ? `${departure.minutes} min` : "Nå"}
+            {departure.minutes === 0 ? "Nå" : `${departure.minutes} min`}
           </li>
         ))}
       </ul>

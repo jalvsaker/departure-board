@@ -1,9 +1,9 @@
 import { useState, useEffect, type FormEvent } from "react";
-import { stationSearch, type place } from "../utils/entur";
+import { stationSearch, type Place } from "../utils/entur";
 
 export function StationSearch() {
   const [search, setSearch] = useState("");
-  const [results, setResults] = useState<place[]>([]);
+  const [results, setResults] = useState<Place[]>([]);
 
   async function fetchData(abortController: AbortController) {
     if (search === "") {
