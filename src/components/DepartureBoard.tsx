@@ -30,20 +30,26 @@ export function DepartureBoard({
   return (
     <>
       <table>
-        <th>Line</th>
-        <th>Destination</th>
-        <th>Platform</th>
-        <th>Departure</th>
-        {departures.map((departure) => (
-          <tr key={departure.line + departure.destination}>
-            <td>{departure.line}</td>
-            <td>{departure.destination}</td>
-            <td>{departure.platform}</td>
-            <td>
-              {departure.minutes === 0 ? "Now" : `${departure.minutes} min`}
-            </td>
+        <thead>
+          <tr>
+            <th>Line</th>
+            <th>Destination</th>
+            <th>Platform</th>
+            <th>Departure</th>
           </tr>
-        ))}
+        </thead>
+        <tbody>
+          {departures.map((departure) => (
+            <tr key={departure.line + departure.destination}>
+              <td>{departure.line}</td>
+              <td>{departure.destination}</td>
+              <td>{departure.platform}</td>
+              <td>
+                {departure.minutes === 0 ? "Now" : `${departure.minutes} min`}
+              </td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </>
   );
