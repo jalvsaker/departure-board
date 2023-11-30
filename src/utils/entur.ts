@@ -35,8 +35,6 @@ export async function fetchDepartures(station: string) {
 
   const json = await res.json();
 
-  console.log(json);
-
   if (json.data.stopPlace === null) {
     return undefined;
   }
@@ -71,4 +69,33 @@ export interface departure {
   destination: string;
   departureTime: Date;
   minutes: number;
+}
+
+export async function stationSearch(
+  search: string,
+  abortController: AbortController,
+) {
+  const res = await fetch(
+    `https://api.entur.io/geocoder/v1/autocomplete?text=${search}&size=20&lang=no&boundary.country=NOR`,
+    {
+      signal: abortController.signal,
+    },
+  );
+
+  const json = await res.json();
+  const places: place[] = json.features.flatMap((feature: any) => {
+    if (feature.properties.id.includes("NSR:StopPlace")) {
+      return {
+        id: feature.properties.id,
+        name: feature.properties.label,
+      };
+    } else return [];
+  });
+
+  return places;
+}
+
+export interface place {
+  id: string;
+  name: string;
 }

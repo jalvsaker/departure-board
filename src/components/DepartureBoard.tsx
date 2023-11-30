@@ -28,7 +28,7 @@ export function DepartureBoard({
 
   return (
     <>
-      <h2>{stationName}</h2>
+      <h1>{stationName}</h1>
       <ul>
         {departures.map((departure) => (
           <li key={departure.line + departure.destination}>

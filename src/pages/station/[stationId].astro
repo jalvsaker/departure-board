@@ -3,14 +3,14 @@ import Layout from "../../layouts/Layout.astro";
 import { DepartureBoard } from "../../components/DepartureBoard";
 import { fetchDepartures } from "../../utils/entur";
 
+export const prerender = false;
+
 const { stationId } = Astro.params;
 if (!stationId) throw new Error("");
 const res = await fetchDepartures(stationId);
 
 if (!res) {
-  const error = await fetch(`${Astro.url}/404`);
-  return new Response(error.body, {
-    headers: error.headers,
+  return new Response("Not found", {
     status: 404,
     statusText: "Not Found",
   });
