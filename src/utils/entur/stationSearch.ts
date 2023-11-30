@@ -1,3 +1,5 @@
+import { ET_CLIENT_NAME } from "./constants";
+
 export async function stationSearch(
   search: string,
   abortController: AbortController,
@@ -6,6 +8,7 @@ export async function stationSearch(
     `https://api.entur.io/geocoder/v1/autocomplete?text=${search}&size=20&lang=no&boundary.country=NOR&layers=venue`,
     {
       signal: abortController.signal,
+      headers: { "ET-Client-Name": ET_CLIENT_NAME },
     },
   );
 

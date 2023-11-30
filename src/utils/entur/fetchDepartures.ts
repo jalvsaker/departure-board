@@ -1,33 +1,35 @@
+import { ET_CLIENT_NAME } from "./constants";
+
 export async function fetchDepartures(station: string) {
   const res = await fetch("https://api.entur.io/journey-planner/v3/graphql", {
     method: "POST",
     headers: {
       "Content-type": "application/json",
-      "ET-Client-Name": "jalvsaker-departure-board",
+      "ET-Client-Name": ET_CLIENT_NAME,
     },
     body: JSON.stringify({
       query: `
         query getCalls($station: String!) {
-          stopPlace(id: $station) {
-              name
-              estimatedCalls(
-                  numberOfDeparturesPerLineAndDestinationDisplay: 1
-                  numberOfDepartures: 30
-                  timeRange: 3600
-              ) {
-                  destinationDisplay {
-                      frontText
-                  }
-                  serviceJourney {
-                      line {
-                          publicCode
-                      }
-                  }
-                  expectedDepartureTime
-              }
-          }
+            stopPlace(id: $station) {
+                name
+                estimatedCalls(
+                    numberOfDeparturesPerLineAndDestinationDisplay: 1
+                    numberOfDepartures: 30
+                    timeRange: 3600
+                ) {
+                    destinationDisplay {
+                        frontText
+                    }
+                    serviceJourney {
+                        line {
+                            publicCode
+                        }
+                    }
+                    expectedDepartureTime
+                }
+            }
         }
-        `,
+      `,
       variables: { station },
     }),
   });
