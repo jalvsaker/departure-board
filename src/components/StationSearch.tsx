@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type FormEvent } from "react";
 import { stationSearch, type place } from "../utils/entur";
 
 export function StationSearch() {
@@ -12,6 +12,7 @@ export function StationSearch() {
     }
     const places = await stationSearch(search, abortController);
 
+    if (abortController.signal.aborted) return;
     setResults(places);
   }
 
@@ -23,13 +24,22 @@ export function StationSearch() {
     };
   }, [search]);
 
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    if (results[0]) {
+      window.location.href = `/station/${results[0].id}`;
+    }
+  }
+
   return (
     <>
-      <input
-        placeholder="Station"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      <form onSubmit={handleSubmit}>
+        <input
+          placeholder="Station"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </form>
       <ul>
         {results.map((place: any) => (
           <li key={place.id}>
