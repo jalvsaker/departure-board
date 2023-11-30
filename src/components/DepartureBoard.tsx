@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
-import { fetchDepartures, type Departure } from "../utils/entur";
+import {
+  fetchDepartures,
+  type Departure,
+} from "../utils/entur/fetchDepartures";
 
 export function DepartureBoard({
   station,

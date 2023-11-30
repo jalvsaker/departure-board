@@ -1,5 +1,5 @@
 import { useState, useEffect, type FormEvent } from "react";
-import { stationSearch, type Place } from "../utils/entur";
+import { stationSearch, type Place } from "../utils/entur/stationSearch";
 
 export function StationSearch() {
   const [search, setSearch] = useState("");

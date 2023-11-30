@@ -7,27 +7,27 @@ export async function fetchDepartures(station: string) {
     },
     body: JSON.stringify({
       query: `
-      query getCalls($station: String!) {
-        stopPlace(id: $station) {
-            name
-            estimatedCalls(
-                numberOfDeparturesPerLineAndDestinationDisplay: 1
-                numberOfDepartures: 30
-                timeRange: 3600
-            ) {
-                destinationDisplay {
-                    frontText
-                }
-                serviceJourney {
-                    line {
-                        publicCode
-                    }
-                }
-                expectedDepartureTime
-            }
+        query getCalls($station: String!) {
+          stopPlace(id: $station) {
+              name
+              estimatedCalls(
+                  numberOfDeparturesPerLineAndDestinationDisplay: 1
+                  numberOfDepartures: 30
+                  timeRange: 3600
+              ) {
+                  destinationDisplay {
+                      frontText
+                  }
+                  serviceJourney {
+                      line {
+                          publicCode
+                      }
+                  }
+                  expectedDepartureTime
+              }
+          }
         }
-      }
-      `,
+        `,
       variables: { station },
     }),
   });
@@ -72,31 +72,4 @@ export interface Departure {
   destination: string;
   departureTime: Date;
   minutes: number;
-}
-
-export async function stationSearch(
-  search: string,
-  abortController: AbortController,
-) {
-  const res = await fetch(
-    `https://api.entur.io/geocoder/v1/autocomplete?text=${search}&size=20&lang=no&boundary.country=NOR&layers=venue`,
-    {
-      signal: abortController.signal,
-    },
-  );
-
-  const json = await res.json();
-  const places: Place[] = json.features.map((feature: any) => {
-    return {
-      id: feature.properties.id,
-      name: feature.properties.label,
-    };
-  });
-
-  return places;
-}
-
-export interface Place {
-  id: string;
-  name: string;
 }
