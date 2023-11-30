@@ -6,7 +6,10 @@ export function StationSearch() {
   const [results, setResults] = useState<place[]>([]);
 
   async function fetchData(abortController: AbortController) {
-    if (search === "") return;
+    if (search === "") {
+      setResults([]);
+      return;
+    }
     const places = await stationSearch(search, abortController);
 
     setResults(places);
