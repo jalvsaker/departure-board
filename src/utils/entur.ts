@@ -1,7 +1,10 @@
 export async function fetchDepartures(station: string) {
   const res = await fetch("https://api.entur.io/journey-planner/v3/graphql", {
     method: "POST",
-    headers: { "Content-type": "application/json" },
+    headers: {
+      "Content-type": "application/json",
+      "ET-Client-Name": "jalvsaker-departure-board",
+    },
     body: JSON.stringify({
       query: `
       query getCalls($station: String!) {
