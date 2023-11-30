@@ -7,9 +7,9 @@ export const prerender = false;
 
 const { stationId } = Astro.params;
 if (!stationId) throw new Error("");
-const res = await fetchDepartures(stationId);
+const station = await fetchDepartures(stationId);
 
-if (!res) {
+if (!station) {
   return new Response("Not found", {
     status: 404,
     statusText: "Not Found",
@@ -17,11 +17,12 @@ if (!res) {
 }
 ---
 
-<Layout title="Station deps">
+<Layout title={station.name}>
+  <h1>{station.name}</h1>
   <DepartureBoard
     station={stationId}
-    stationName={res?.name}
-    initialDepartures={res?.departures || []}
+    stationName={station?.name}
+    initialDepartures={station?.departures || []}
     client:load
   />
 </Layout>
