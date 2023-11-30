@@ -29,15 +29,22 @@ export function DepartureBoard({
 
   return (
     <>
-      <ul>
+      <table>
+        <th>Line</th>
+        <th>Destination</th>
+        <th>Platform</th>
+        <th>Departure</th>
         {departures.map((departure) => (
-          <li key={departure.line + departure.destination}>
-            {departure.line} {departure.destination}
-            {" - "}
-            {departure.minutes === 0 ? "Nå" : `${departure.minutes} min`}
-          </li>
+          <tr key={departure.line + departure.destination}>
+            <td>{departure.line}</td>
+            <td>{departure.destination}</td>
+            <td>{departure.platform}</td>
+            <td>
+              {departure.minutes === 0 ? "Now" : `${departure.minutes} min`}
+            </td>
+          </tr>
         ))}
-      </ul>
+      </table>
     </>
   );
 }

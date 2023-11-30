@@ -25,6 +25,9 @@ export async function fetchDepartures(station: string) {
                             publicCode
                         }
                     }
+                    quay {
+                        publicCode
+                    }
                     expectedDepartureTime
                 }
             }
@@ -59,6 +62,7 @@ export async function fetchDepartures(station: string) {
         destination: departure.destinationDisplay.frontText,
         departureTime,
         minutes: minutes,
+        platform: departure.quay.publicCode,
       };
     },
   );
@@ -74,4 +78,5 @@ export interface Departure {
   destination: string;
   departureTime: Date;
   minutes: number;
+  platform: string;
 }
