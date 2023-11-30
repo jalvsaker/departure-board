@@ -76,20 +76,18 @@ export async function stationSearch(
   abortController: AbortController,
 ) {
   const res = await fetch(
-    `https://api.entur.io/geocoder/v1/autocomplete?text=${search}&size=20&lang=no&boundary.country=NOR`,
+    `https://api.entur.io/geocoder/v1/autocomplete?text=${search}&size=20&lang=no&boundary.country=NOR&layers=venue`,
     {
       signal: abortController.signal,
     },
   );
 
   const json = await res.json();
-  const places: place[] = json.features.flatMap((feature: any) => {
-    if (feature.properties.id.includes("NSR:StopPlace")) {
-      return {
-        id: feature.properties.id,
-        name: feature.properties.label,
-      };
-    } else return [];
+  const places: place[] = json.features.map((feature: any) => {
+    return {
+      id: feature.properties.id,
+      name: feature.properties.label,
+    };
   });
 
   return places;
