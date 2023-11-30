@@ -1,0 +1,27 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { DepartureBoard } from "../../components/DepartureBoard";
+import { fetchDepartures } from "../../utils/entur";
+
+const { stationId } = Astro.params;
+if (!stationId) throw new Error("");
+const res = await fetchDepartures(stationId);
+
+if (!res) {
+  const error = await fetch(`${Astro.url}/404`);
+  return new Response(error.body, {
+    headers: error.headers,
+    status: 404,
+    statusText: "Not Found",
+  });
+}
+---
+
+<Layout title="Station deps">
+  <DepartureBoard
+    station={stationId}
+    stationName={res?.name}
+    initialDepartures={res?.departures || []}
+    client:load
+  />
+</Layout>
