@@ -22,7 +22,9 @@ const { title } = Astro.props;
   <body class="overflow-y-scroll dark:bg-gray-950 dark:text-white">
     <main class="mx-auto lg:max-w-4xl min-h-screen lg:border-x relative">
       <slot />
-      <a href="/" class="left-1 top-1 absolute text-xl"><FaHome /></a>
+      <a href="/" class="left-1 top-1 absolute text-xl">
+        <FaHome />
+      </a>
       <DarkMode />
     </main>
   </body>
