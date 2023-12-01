@@ -1,20 +1,13 @@
 ---
 import { FaMoon, FaSun } from "react-icons/fa";
+
+interface Props {
+  className?: string;
+}
+
+const { className } = Astro.props;
 ---
 
-<script is:inline>
-  if (!localStorage.getItem("theme")) {
-    localStorage.setItem(
-      "theme",
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light",
-    );
-  }
-  if (localStorage.getItem("theme") === "dark") {
-    document.documentElement.classList.add("dark");
-  }
-</script>
 <script>
   function changeIcon(isDark: boolean) {
     if (isDark) {
@@ -51,7 +44,7 @@ import { FaMoon, FaSun } from "react-icons/fa";
   });
 </script>
 
-<button class="right-1 top-1 absolute text-xl" data-dark-toggle>
+<button class={className} data-dark-toggle>
   <FaSun className="hidden" data-dark-sun />
   <FaMoon className="hidden" data-dark-moon />
 </button>
