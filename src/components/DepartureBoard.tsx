@@ -12,7 +12,7 @@ export function DepartureBoard({
   initialDepartures: Departure[];
 }) {
   const [departures, setDepartures] = useState<Departure[]>(initialDepartures);
-  const modes = [...new Set(departures.map((d) => d.mode))].toSorted();
+  const modes = [...new Set(departures.map((d) => d.mode))].sort();
   const [shownModes, setShownModes] = useState(modes);
 
   async function fetchData() {
