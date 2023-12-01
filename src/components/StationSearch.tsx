@@ -36,7 +36,7 @@ export function StationSearch() {
       <form onSubmit={handleSubmit}>
         <input
           placeholder="Station"
-          className="text-center border-y w-full p-1"
+          className="text-center border-y w-full p-1 dark:bg-black"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -45,7 +45,7 @@ export function StationSearch() {
         {results.map((place) => (
           <li
             key={place.id}
-            className="text-center first:font-semibold odd:bg-gray-100"
+            className="text-center first:font-semibold odd:bg-gray-100 dark:odd:bg-gray-900"
           >
             <a href={`/station/${place.id}`}>{place.name}</a>
           </li>

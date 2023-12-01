@@ -71,7 +71,7 @@ export function DepartureBoard({
       )}
       <table className="w-full">
         <thead>
-          <tr className="bg-gray-200">
+          <tr className="bg-gray-200 dark:bg-gray-600">
             <th>Line</th>
             <th className="text-left">Destination</th>
             <th>Platform</th>
@@ -84,7 +84,7 @@ export function DepartureBoard({
               shownModes.includes(departure.mode) && (
                 <tr
                   key={departure.id + departure.departureTime}
-                  className="even:bg-gray-100"
+                  className="even:bg-gray-100 dark:even:bg-gray-800"
                 >
                   <td className="text-center">{departure.line}</td>
                   <td>{departure.destination}</td>
