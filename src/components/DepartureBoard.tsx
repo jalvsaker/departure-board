@@ -7,13 +7,12 @@ import {
 export function DepartureBoard({
   station,
   initialDepartures,
-  modes,
 }: {
   station: string;
   initialDepartures: Departure[];
-  modes: string[];
 }) {
   const [departures, setDepartures] = useState<Departure[]>(initialDepartures);
+  const modes = [...new Set(departures.map((d) => d.mode))].sort();
   const [shownModes, setShownModes] = useState(modes);
 
   async function fetchData() {
