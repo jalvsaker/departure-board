@@ -37,6 +37,18 @@ export function DepartureBoard({
     }
   }
 
+  function formatTime(departure: Departure): string {
+    if (departure.minutes === 0) {
+      return "Now";
+    } else if (departure.minutes >= 1 && departure.minutes <= 15) {
+      return `${departure.minutes} min`;
+    } else {
+      return departure.departureTime.toLocaleString("no", {
+        timeStyle: "short",
+      });
+    }
+  }
+
   return (
     <>
       {modes.length > 1 &&
@@ -64,15 +76,11 @@ export function DepartureBoard({
           {departures.map(
             (departure) =>
               shownModes.includes(departure.mode) && (
-                <tr key={departure.id}>
+                <tr key={departure.id + departure.departureTime}>
                   <td>{departure.line}</td>
                   <td>{departure.destination}</td>
                   <td>{departure.platform}</td>
-                  <td>
-                    {departure.minutes === 0
-                      ? "Now"
-                      : `${departure.minutes} min`}
-                  </td>
+                  <td>{formatTime(departure)}</td>
                 </tr>
               ),
           )}
