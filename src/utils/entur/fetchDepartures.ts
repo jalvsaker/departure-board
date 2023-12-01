@@ -12,6 +12,7 @@ export async function fetchDepartures(station: string) {
         query getCalls($station: String!) {
             stopPlace(id: $station) {
                 name
+                transportMode
                 estimatedCalls(
                     numberOfDeparturesPerLineAndDestinationDisplay: 1
                     numberOfDepartures: 50
@@ -71,6 +72,7 @@ export async function fetchDepartures(station: string) {
 
   return {
     name: json.data.stopPlace.name,
+    modes: json.data.stopPlace.transportMode,
     departures,
   };
 }
