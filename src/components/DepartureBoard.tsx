@@ -86,14 +86,14 @@ export function DepartureBoard({
                   key={departure.id + departure.departureTime.getTime()}
                   className="even:bg-gray-100 dark:even:bg-gray-800 cursor-pointer"
                   onClick={() =>
-                    (window.location.href = `/service/${departure.id}`)
+                    (window.location.href = `/service/${departure.date}/${departure.id}`)
                   }
                 >
                   <td className="text-center">{departure.line}</td>
                   <td>{departure.destination}</td>
                   <td className="text-center">{departure.platform}</td>
                   <td className="text-center">
-                    <a href={`/service/${departure.id}`}>
+                    <a href={`/service/${departure.date}/${departure.id}`}>
                       {formatTime(departure)}
                     </a>
                   </td>

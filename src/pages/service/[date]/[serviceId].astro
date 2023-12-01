@@ -1,13 +1,13 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import { ServiceBoard } from "../../components/ServiceBoard";
-import { fetchJourney } from "../../utils/entur/fetchJourney";
+import Layout from "../../../layouts/Layout.astro";
+import { ServiceBoard } from "../../../components/ServiceBoard";
+import { fetchJourney } from "../../../utils/entur/fetchJourney";
 
 export const prerender = false;
 
-const { serviceId } = Astro.params;
-if (!serviceId) throw new Error("");
-const journey = await fetchJourney(serviceId);
+const { serviceId, date } = Astro.params;
+if (!serviceId || !date) throw new Error("");
+const journey = await fetchJourney(serviceId, date);
 
 if (!journey) {
   return new Response("Not found", {
@@ -39,6 +39,7 @@ const otherDestinations =
   <ServiceBoard
     serviceId={serviceId}
     initialCalls={journey.calls}
+    date={date}
     client:load
   />
 </Layout>

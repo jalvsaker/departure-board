@@ -4,9 +4,11 @@ import { fetchJourney, type Call } from "../utils/entur/fetchJourney";
 export function ServiceBoard({
   serviceId,
   initialCalls,
+  date,
 }: {
   serviceId: string;
   initialCalls: Call[];
+  date: string;
 }) {
   function formatTime(date: Date) {
     return date.toLocaleString("no", {
@@ -18,7 +20,7 @@ export function ServiceBoard({
   const [calls, setCalls] = useState(initialCalls);
 
   async function fetchData() {
-    const res = await fetchJourney(serviceId);
+    const res = await fetchJourney(serviceId, date);
     if (res) {
       setCalls(res.calls);
     }

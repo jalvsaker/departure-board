@@ -1,14 +1,14 @@
 import { graphql } from "./common";
 
-export async function fetchJourney(id: string) {
+export async function fetchJourney(id: string, date: string) {
   const res = await graphql(
     `
-      query getJourney($id: String!) {
+      query getJourney($id: String!, $date: Date!) {
         serviceJourney(id: $id) {
           line {
             publicCode
           }
-          estimatedCalls {
+          estimatedCalls(date: $date) {
             aimedDepartureTime
             actualDepartureTime
             expectedDepartureTime
@@ -28,7 +28,7 @@ export async function fetchJourney(id: string) {
         }
       }
     `,
-    { id },
+    { id, date },
   );
 
   if (!res.ok) {
