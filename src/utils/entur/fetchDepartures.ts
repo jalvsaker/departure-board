@@ -13,7 +13,7 @@ export async function fetchDepartures(station: string) {
             stopPlace(id: $station) {
                 name
                 estimatedCalls(
-                    numberOfDeparturesPerLineAndDestinationDisplay: 1
+                    numberOfDeparturesPerLineAndDestinationDisplay: 2
                     numberOfDepartures: 50
                     timeRange: 3600
                 ) {
