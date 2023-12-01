@@ -45,6 +45,7 @@ export function DepartureBoard({
     } else {
       return departure.departureTime.toLocaleString("no", {
         timeStyle: "short",
+        timeZone: "Europe/Oslo",
       });
     }
   }
