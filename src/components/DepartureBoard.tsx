@@ -51,23 +51,28 @@ export function DepartureBoard({
 
   return (
     <>
-      {modes.length > 1 &&
-        modes.map((mode) => (
-          <span key={mode}>
-            <input
-              type="checkbox"
-              id={mode}
-              checked={shownModes.includes(mode)}
-              onChange={() => handleChange(mode)}
-            />
-            <label htmlFor={mode}>{mode}</label>
-          </span>
-        ))}
-      <table>
+      {modes.length > 1 && (
+        <div className="text-center pb-2">
+          {modes.map((mode) => (
+            <span key={mode} className="px-2">
+              <input
+                type="checkbox"
+                id={mode}
+                checked={shownModes.includes(mode)}
+                onChange={() => handleChange(mode)}
+              />
+              <label htmlFor={mode} className="capitalize pl-1">
+                {mode}
+              </label>
+            </span>
+          ))}
+        </div>
+      )}
+      <table className="w-full">
         <thead>
-          <tr>
+          <tr className="bg-gray-200">
             <th>Line</th>
-            <th>Destination</th>
+            <th className="text-left">Destination</th>
             <th>Platform</th>
             <th>Departure</th>
           </tr>
@@ -76,11 +81,14 @@ export function DepartureBoard({
           {departures.map(
             (departure) =>
               shownModes.includes(departure.mode) && (
-                <tr key={departure.id + departure.departureTime}>
-                  <td>{departure.line}</td>
+                <tr
+                  key={departure.id + departure.departureTime}
+                  className="even:bg-gray-100"
+                >
+                  <td className="text-center">{departure.line}</td>
                   <td>{departure.destination}</td>
-                  <td>{departure.platform}</td>
-                  <td>{formatTime(departure)}</td>
+                  <td className="text-center">{departure.platform}</td>
+                  <td className="text-center">{formatTime(departure)}</td>
                 </tr>
               ),
           )}
