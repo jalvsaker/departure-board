@@ -14,7 +14,7 @@ export async function fetchDepartures(station: string) {
                 name
                 estimatedCalls(
                     numberOfDeparturesPerLineAndDestinationDisplay: 1
-                    numberOfDepartures: 30
+                    numberOfDepartures: 50
                     timeRange: 3600
                 ) {
                     destinationDisplay {
@@ -23,6 +23,7 @@ export async function fetchDepartures(station: string) {
                     serviceJourney {
                         line {
                             publicCode
+                            transportMode
                         }
                     }
                     quay {
@@ -63,6 +64,7 @@ export async function fetchDepartures(station: string) {
         departureTime,
         minutes: minutes,
         platform: departure.quay.publicCode,
+        mode: departure.serviceJourney.line.transportMode,
       };
     },
   );
@@ -79,4 +81,5 @@ export interface Departure {
   departureTime: Date;
   minutes: number;
   platform: string;
+  mode: string;
 }
