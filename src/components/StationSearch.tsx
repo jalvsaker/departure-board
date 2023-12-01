@@ -41,7 +41,7 @@ export function StationSearch() {
         />
       </form>
       <ul>
-        {results.map((place: any) => (
+        {results.map((place) => (
           <li key={place.id}>
             <a href={`/station/${place.id}`}>{place.name}</a>
           </li>

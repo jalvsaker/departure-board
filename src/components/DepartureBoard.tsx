@@ -23,7 +23,7 @@ export function DepartureBoard({
   useEffect(() => {
     const interval = setInterval(() => {
       fetchData();
-    }, 45000);
+    }, 20000);
     return () => clearInterval(interval);
   }, []);
 
