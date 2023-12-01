@@ -12,21 +12,22 @@
   }
 </script>
 <script>
-  const button = document.querySelector("#dark-toggle");
-  if (button)
+  document.querySelectorAll("[data-dark-toggle]").forEach((button) => {
     button.textContent =
       localStorage.getItem("theme") === "dark" ? "Light mode" : "Dark mode";
-  button?.addEventListener("click", () => {
-    if (localStorage.getItem("theme") === "dark") {
-      localStorage.setItem("theme", "light");
-      document.documentElement.classList.remove("dark");
-      button.textContent = "Dark mode";
-    } else {
-      localStorage.setItem("theme", "dark");
-      document.documentElement.classList.add("dark");
-      button.textContent = "Light mode";
-    }
+
+    button?.addEventListener("click", () => {
+      if (localStorage.getItem("theme") === "dark") {
+        localStorage.setItem("theme", "light");
+        document.documentElement.classList.remove("dark");
+        button.textContent = "Dark mode";
+      } else {
+        localStorage.setItem("theme", "dark");
+        document.documentElement.classList.add("dark");
+        button.textContent = "Light mode";
+      }
+    });
   });
 </script>
 
-<button class="right-1 top-1 absolute" id="dark-toggle"></button>
+<button class="right-1 top-1 absolute" data-dark-toggle></button>
