@@ -1,0 +1,43 @@
+---
+import { FaMoon, FaSun } from "react-icons/fa";
+
+interface Props {
+  className?: string;
+}
+
+const { className } = Astro.props;
+---
+
+<script>
+  function changeTheme() {
+    if (localStorage.getItem("theme") === "dark") {
+      localStorage.setItem("theme", "light");
+      document.documentElement.classList.remove("dark");
+      document
+        .querySelectorAll("[data-dark-moon]")
+        .forEach((e) => e.classList.add("hidden"));
+      document
+        .querySelectorAll("[data-dark-sun]")
+        .forEach((e) => e.classList.remove("hidden"));
+    } else {
+      localStorage.setItem("theme", "dark");
+      document.documentElement.classList.add("dark");
+      document
+        .querySelectorAll("[data-dark-moon]")
+        .forEach((e) => e.classList.remove("hidden"));
+      document
+        .querySelectorAll("[data-dark-sun]")
+        .forEach((e) => e.classList.add("hidden"));
+    }
+  }
+
+  changeTheme();
+  document.querySelectorAll("[data-dark-toggle]").forEach((button) => {
+    button.addEventListener("click", changeTheme);
+  });
+</script>
+
+<button class={className} data-dark-toggle>
+  <FaSun className="hidden" data-dark-sun />
+  <FaMoon className="hidden" data-dark-moon />
+</button>
