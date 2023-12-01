@@ -51,7 +51,9 @@ export function ServiceBoard({
                 (window.location.href = `/station/${call.stationId}`)
               }
             >
-              <td className="pl-2">{call.station}</td>
+              <td className="pl-2">
+                <a href={`/station/${call.stationId}`}>{call.station}</a>
+              </td>
               <td className="text-center">
                 {formatTime(call.aimedDepartureTime)}
               </td>

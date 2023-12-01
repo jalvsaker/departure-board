@@ -92,7 +92,11 @@ export function DepartureBoard({
                   <td className="text-center">{departure.line}</td>
                   <td>{departure.destination}</td>
                   <td className="text-center">{departure.platform}</td>
-                  <td className="text-center">{formatTime(departure)}</td>
+                  <td className="text-center">
+                    <a href={`/service/${departure.id}`}>
+                      {formatTime(departure)}
+                    </a>
+                  </td>
                 </tr>
               ),
           )}
