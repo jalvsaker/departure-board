@@ -21,6 +21,7 @@ export async function fetchDepartures(station: string) {
                         frontText
                     }
                     serviceJourney {
+                        id
                         line {
                             publicCode
                             transportMode
@@ -59,6 +60,7 @@ export async function fetchDepartures(station: string) {
       );
 
       return {
+        id: departure.serviceJourney.id,
         line: departure.serviceJourney.line.publicCode,
         destination: departure.destinationDisplay.frontText,
         departureTime,
@@ -76,6 +78,7 @@ export async function fetchDepartures(station: string) {
 }
 
 export interface Departure {
+  id: string;
   line: string;
   destination: string;
   departureTime: Date;

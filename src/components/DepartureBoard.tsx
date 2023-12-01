@@ -64,7 +64,7 @@ export function DepartureBoard({
           {departures.map(
             (departure) =>
               shownModes.includes(departure.mode) && (
-                <tr key={departure.line + departure.destination}>
+                <tr key={departure.id}>
                   <td>{departure.line}</td>
                   <td>{departure.destination}</td>
                   <td>{departure.platform}</td>
