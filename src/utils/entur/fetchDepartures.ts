@@ -1,43 +1,36 @@
-import { ET_CLIENT_NAME } from "./constants";
+import { graphql } from "./common";
 
 export async function fetchDepartures(station: string) {
-  const res = await fetch("https://api.entur.io/journey-planner/v3/graphql", {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
-      "ET-Client-Name": ET_CLIENT_NAME,
-    },
-    body: JSON.stringify({
-      query: `
-        query getCalls($station: String!) {
-            stopPlace(id: $station) {
-                name
-                estimatedCalls(
-                    numberOfDeparturesPerLineAndDestinationDisplay: 2
-                    numberOfDepartures: 50
-                    timeRange: 3600
-                ) {
-                    destinationDisplay {
-                        frontText
-                    }
-                    serviceJourney {
-                        id
-                        line {
-                            publicCode
-                            transportMode
-                        }
-                    }
-                    quay {
-                        publicCode
-                    }
-                    expectedDepartureTime
-                }
+  const res = await graphql(
+    `
+      query getCalls($station: String!) {
+        stopPlace(id: $station) {
+          name
+          estimatedCalls(
+            numberOfDeparturesPerLineAndDestinationDisplay: 2
+            numberOfDepartures: 50
+            timeRange: 3600
+          ) {
+            destinationDisplay {
+              frontText
             }
+            serviceJourney {
+              id
+              line {
+                publicCode
+                transportMode
+              }
+            }
+            quay {
+              publicCode
+            }
+            expectedDepartureTime
+          }
         }
-      `,
-      variables: { station },
-    }),
-  });
+      }
+    `,
+    { station },
+  );
 
   if (!res.ok) {
     return undefined;

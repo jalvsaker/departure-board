@@ -1,4 +1,4 @@
-import { ET_CLIENT_NAME } from "./constants";
+import { ET_CLIENT_NAME } from "./common";
 
 export async function stationSearch(
   search: string,

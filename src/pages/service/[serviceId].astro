@@ -1,0 +1,44 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { ServiceBoard } from "../../components/ServiceBoard";
+import { fetchJourney } from "../../utils/entur/fetchJourney";
+
+export const prerender = false;
+
+const { serviceId } = Astro.params;
+if (!serviceId) throw new Error("");
+const journey = await fetchJourney(serviceId);
+
+if (!journey) {
+  return new Response("Not found", {
+    status: 404,
+    statusText: "Not Found",
+  });
+}
+
+const title = `${journey.line} ${
+  journey.destinations[journey.destinations.length - 1]
+}`;
+const otherDestinations =
+  journey.line +
+  " " +
+  journey.destinations
+    .splice(0, journey.destinations.length - 2)
+    .join(`, ${journey.line} `);
+---
+
+<Layout title={title}>
+  <h1 class="text-3xl text-center py-2">
+    {title}
+  </h1>
+  {
+    journey.destinations.length > 1 && (
+      <div class="text-center pb-2">{otherDestinations}</div>
+    )
+  }
+  <ServiceBoard
+    serviceId={serviceId}
+    initialCalls={journey.calls}
+    client:load
+  />
+</Layout>

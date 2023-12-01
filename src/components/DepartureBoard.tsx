@@ -83,8 +83,11 @@ export function DepartureBoard({
             (departure) =>
               shownModes.includes(departure.mode) && (
                 <tr
-                  key={departure.id + departure.departureTime}
-                  className="even:bg-gray-100 dark:even:bg-gray-800"
+                  key={departure.id + departure.departureTime.getTime()}
+                  className="even:bg-gray-100 dark:even:bg-gray-800 cursor-pointer"
+                  onClick={() =>
+                    (window.location.href = `/service/${departure.id}`)
+                  }
                 >
                   <td className="text-center">{departure.line}</td>
                   <td>{departure.destination}</td>
