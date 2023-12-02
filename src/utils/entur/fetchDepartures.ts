@@ -16,6 +16,7 @@ export async function fetchDepartures(station: string) {
             }
             serviceJourney {
               id
+              publicCode
               line {
                 publicCode
                 transportMode
@@ -53,12 +54,16 @@ export async function fetchDepartures(station: string) {
         (departureTime.getTime() - now.getTime()) / (60 * 1000),
       );
 
+      const line =
+        departure.serviceJourney.line.publicCode ??
+        departure.serviceJourney.publicCode;
+
       return {
         id: departure.serviceJourney.id,
-        line: departure.serviceJourney.line.publicCode,
+        line,
         destination: departure.destinationDisplay.frontText,
         departureTime,
-        minutes: minutes,
+        minutes,
         platform: departure.quay.publicCode,
         mode: departure.serviceJourney.line.transportMode,
         date: departure.date,

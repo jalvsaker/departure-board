@@ -8,6 +8,7 @@ export async function fetchJourney(id: string, date: string) {
           line {
             publicCode
           }
+          publicCode
           estimatedCalls(date: $date) {
             aimedDepartureTime
             actualDepartureTime
@@ -61,8 +62,12 @@ export async function fetchJourney(id: string, date: string) {
     ),
   ];
 
+  const line =
+    json.data.serviceJourney.line.publicCode ??
+    json.data.serviceJourney.publicCode;
+
   return {
-    line: json.data.serviceJourney.line.publicCode,
+    line,
     calls,
     destinations,
   };
