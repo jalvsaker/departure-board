@@ -11,8 +11,7 @@ export function StationSearch() {
       return;
     }
     const places = await stationSearch(search, abortController);
-
-    if (abortController.signal.aborted) return;
+    if (!places || abortController.signal.aborted) return;
     setResults(places);
   }
 
