@@ -44,7 +44,7 @@ const { className } = Astro.props;
   });
 </script>
 
-<button class={className} data-dark-toggle>
+<button class={className} data-dark-toggle aria-label="Toggle color theme">
   <FaSun className="hidden" data-dark-sun />
   <FaMoon className="hidden" data-dark-moon />
 </button>
