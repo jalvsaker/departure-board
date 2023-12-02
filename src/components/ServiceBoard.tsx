@@ -48,10 +48,7 @@ export function ServiceBoard({
           {calls.map((call) => (
             <tr
               key={call.station + call.aimedDepartureTime.getTime()}
-              className="even:bg-gray-100 dark:even:bg-gray-800 cursor-pointer"
-              onClick={() =>
-                (window.location.href = `/station/${call.stationId}`)
-              }
+              className="even:bg-gray-100 dark:even:bg-gray-800"
             >
               <td className="pl-2">
                 <a href={`/station/${call.stationId}`}>{call.station}</a>
