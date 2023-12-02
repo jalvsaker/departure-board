@@ -19,12 +19,8 @@ if (!journey) {
 const title = `${journey.line} ${
   journey.destinations[journey.destinations.length - 1]
 }`;
-const otherDestinations =
-  journey.line +
-  " " +
-  journey.destinations
-    .splice(0, journey.destinations.length - 2)
-    .join(`, ${journey.line} `);
+
+const otherDestinations = journey.destinations.slice(0, -1);
 ---
 
 <Layout title={title}>
@@ -33,7 +29,13 @@ const otherDestinations =
   </h1>
   {
     journey.destinations.length > 1 && (
-      <div class="text-center pb-2">{otherDestinations}</div>
+      <div class="text-center pb-2">
+        {otherDestinations.map((destination) => (
+          <span class="pl-1">
+            {journey.line} {destination}
+          </span>
+        ))}
+      </div>
     )
   }
   <ServiceBoard
