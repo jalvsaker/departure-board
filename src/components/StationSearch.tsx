@@ -35,7 +35,7 @@ export function StationSearch() {
       <form onSubmit={handleSubmit}>
         <input
           placeholder="Station"
-          className="text-center border-y w-full p-1 dark:bg-black dark:border-gray-800"
+          className="text-center border-y w-full p-1 dark:bg-black dark:border-gray-800 outline-none"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
