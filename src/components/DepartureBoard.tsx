@@ -39,7 +39,7 @@ export function DepartureBoard({
 
   function formatTime(departure: Departure): string {
     if (!departure.realtime || departure.minutes > 15) {
-      return departure.departureTime.toLocaleString("no", {
+      return departure.expectedDepartureTime.toLocaleString("no", {
         timeStyle: "short",
         timeZone: "Europe/Oslo",
       });
@@ -85,7 +85,7 @@ export function DepartureBoard({
             (departure) =>
               shownModes.includes(departure.mode) && (
                 <tr
-                  key={departure.id + departure.departureTime.getTime()}
+                  key={departure.id + departure.aimedDepartureTime.getTime()}
                   className="even:bg-gray-100 dark:even:bg-gray-800"
                 >
                   <td className="text-center">

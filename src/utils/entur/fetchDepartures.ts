@@ -27,6 +27,7 @@ export async function fetchDepartures(station: string) {
             }
             realtime
             expectedDepartureTime
+            aimedDepartureTime
             date
           }
         }
@@ -49,9 +50,12 @@ export async function fetchDepartures(station: string) {
 
   const departures: Departure[] = json.data.stopPlace.estimatedCalls.map(
     (departure: any): Departure => {
-      const departureTime = new Date(departure.expectedDepartureTime);
+      const expectedDepartureTime = new Date(departure.expectedDepartureTime);
+      const aimedDepartureTime = new Date(departure.aimedDepartureTime);
 
-      const minutes = Math.floor((departureTime.getTime() - now) / (60 * 1000));
+      const minutes = Math.floor(
+        (expectedDepartureTime.getTime() - now) / (60 * 1000),
+      );
 
       const line =
         departure.serviceJourney.line.publicCode ??
@@ -62,7 +66,8 @@ export async function fetchDepartures(station: string) {
         line,
         destination: departure.destinationDisplay.frontText,
         realtime: departure.realtime,
-        departureTime,
+        expectedDepartureTime,
+        aimedDepartureTime,
         minutes,
         platform: departure.quay.publicCode,
         mode: departure.serviceJourney.line.transportMode,
@@ -82,7 +87,8 @@ export interface Departure {
   line: string;
   destination: string;
   realtime: boolean;
-  departureTime: Date;
+  expectedDepartureTime: Date;
+  aimedDepartureTime: Date;
   minutes: number;
   platform: string;
   mode: string;
