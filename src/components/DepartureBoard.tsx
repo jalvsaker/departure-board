@@ -38,16 +38,18 @@ export function DepartureBoard({
   }
 
   function formatTime(departure: Departure): string {
-    if (departure.minutes === 0) {
-      return "Now";
-    } else if (departure.minutes >= 1 && departure.minutes <= 15) {
-      return `${departure.minutes} min`;
-    } else {
+    if (!departure.realtime || departure.minutes > 15) {
       return departure.departureTime.toLocaleString("no", {
         timeStyle: "short",
         timeZone: "Europe/Oslo",
       });
     }
+
+    if (departure.minutes <= 0) {
+      return "Now";
+    }
+
+    return `${departure.minutes} min`;
   }
 
   return (
