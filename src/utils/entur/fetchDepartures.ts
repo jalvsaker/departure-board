@@ -3,7 +3,7 @@ import { graphql } from "./common";
 export async function fetchDepartures(station: string) {
   const res = await graphql(
     `
-      query getCalls($station: String!) {
+      query ($station: String!) {
         stopPlace(id: $station) {
           name
           estimatedCalls(

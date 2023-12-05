@@ -3,7 +3,7 @@ import { graphql } from "./common";
 export async function fetchJourney(id: string, date: string) {
   const res = await graphql(
     `
-      query getJourney($id: String!, $date: Date!) {
+      query ($id: String!, $date: Date!) {
         serviceJourney(id: $id) {
           line {
             publicCode
