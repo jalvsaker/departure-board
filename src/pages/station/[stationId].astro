@@ -9,12 +9,7 @@ const { stationId } = Astro.params;
 if (!stationId) throw new Error("");
 const station = await fetchDepartures(stationId);
 
-if (!station) {
-  return new Response("Not found", {
-    status: 404,
-    statusText: "Not Found",
-  });
-}
+if (!station) return Astro.redirect("/404");
 ---
 
 <Layout title={station.name}>

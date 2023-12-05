@@ -9,12 +9,7 @@ const { serviceId, date } = Astro.params;
 if (!serviceId || !date) throw new Error("");
 const journey = await fetchJourney(serviceId, date);
 
-if (!journey) {
-  return new Response("Not found", {
-    status: 404,
-    statusText: "Not Found",
-  });
-}
+if (!journey) return Astro.redirect("/404");
 
 const title = `${journey.line} ${
   journey.destinations[journey.destinations.length - 1]
