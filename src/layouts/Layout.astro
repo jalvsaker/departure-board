@@ -1,8 +1,6 @@
 ---
 import DarkModeScript from "../components/DarkModeScript.astro";
-import DarkModeButton from "../components/DarkModeButton.astro";
-import { FaHome, FaInfo } from "react-icons/fa";
-import NavLink from "../components/NavLink.astro";
+import NavBar from "../components/NavBar.astro";
 
 interface Props {
   title: string;
@@ -28,16 +26,6 @@ const { title } = Astro.props;
     >
       <slot />
     </main>
-    <nav
-      class="fixed bottom-0 left-0 right-0 flex justify-around dark:bg-gray-950 bg-white border-t border-gray-400 dark:border-gray-800"
-    >
-      <NavLink href="/" label="Home">
-        <FaHome />
-      </NavLink>
-      <NavLink href="/about" label="About">
-        <FaInfo />
-      </NavLink>
-      <DarkModeButton />
-    </nav>
+    <NavBar />
   </body>
 </html>

@@ -1,5 +1,11 @@
 ---
 import { FaMoon, FaSun } from "react-icons/fa";
+
+interface Props {
+  className: string;
+}
+
+const { className } = Astro.props;
 ---
 
 <script>
@@ -38,11 +44,7 @@ import { FaMoon, FaSun } from "react-icons/fa";
   });
 </script>
 
-<button
-  class="text-xl py-2 flex-grow flex justify-center border-r last:border-0 border-gray-400 dark:border-gray-800"
-  data-dark-toggle
-  aria-label="Toggle color theme"
->
+<button class={className} data-dark-toggle aria-label="Toggle color theme">
   <FaSun className="hidden" data-dark-sun />
   <FaMoon className="" data-dark-moon />
 </button>
