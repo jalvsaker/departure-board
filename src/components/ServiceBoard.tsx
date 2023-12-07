@@ -48,7 +48,10 @@ export function ServiceBoard({
           {calls.map((call) => (
             <tr
               key={call.station + call.aimedDepartureTime.getTime()}
-              className="even:bg-gray-100 dark:even:bg-gray-800"
+              className={
+                "even:bg-gray-100 dark:even:bg-gray-800 " +
+                (call.cancellation === true ? "line-through text-gray-400" : "")
+              }
             >
               <td className="pl-2">
                 <a href={`/station/${call.stationId}`}>{call.station}</a>

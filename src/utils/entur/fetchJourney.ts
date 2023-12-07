@@ -13,6 +13,7 @@ export async function fetchJourney(id: string, date: string) {
             aimedDepartureTime
             actualDepartureTime
             expectedDepartureTime
+            cancellation
             quay {
               name
               stopPlace {
@@ -48,6 +49,7 @@ export async function fetchJourney(id: string, date: string) {
         aimedDepartureTime: new Date(call.aimedDepartureTime),
         actualDepartureTime: new Date(call.actualDepartureTime),
         expectedDepartureTime: new Date(call.expectedDepartureTime),
+        cancellation: call.cancellation,
         station: call.quay.name,
         stationId: call.quay.stopPlace.parent?.id ?? call.quay.stopPlace.id,
       };
@@ -77,6 +79,7 @@ export interface Call {
   aimedDepartureTime: Date;
   actualDepartureTime: Date;
   expectedDepartureTime: Date;
+  cancellation: boolean;
   station: string;
   stationId: string;
 }
