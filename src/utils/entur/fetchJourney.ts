@@ -14,6 +14,8 @@ export async function fetchJourney(id: string, date: string) {
             actualDepartureTime
             expectedDepartureTime
             cancellation
+            forAlighting
+            forBoarding
             quay {
               name
               stopPlace {
@@ -49,7 +51,8 @@ export async function fetchJourney(id: string, date: string) {
         aimedDepartureTime: new Date(call.aimedDepartureTime),
         actualDepartureTime: new Date(call.actualDepartureTime),
         expectedDepartureTime: new Date(call.expectedDepartureTime),
-        cancellation: call.cancellation,
+        cancellation:
+          call.cancellation || (!call.forAlighting && !call.forBoarding),
         station: call.quay.name,
         stationId: call.quay.stopPlace.parent?.id ?? call.quay.stopPlace.id,
       };
