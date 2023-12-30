@@ -3,6 +3,7 @@ import {
   fetchDepartures,
   type Departure,
 } from "../utils/entur/fetchDepartures";
+import { FaLocationDot } from "react-icons/fa6";
 
 export function DepartureBoard({
   station,
@@ -98,7 +99,17 @@ export function DepartureBoard({
                       {departure.destination}
                     </a>
                   </td>
-                  <td className="text-center">{departure.platform}</td>
+                  <td className="text-center">
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${departure.platform.latitude}%2C${departure.platform.longitude}`}
+                    >
+                      {departure.platform.code || (
+                        <div className="flex justify-center">
+                          <FaLocationDot />
+                        </div>
+                      )}
+                    </a>
+                  </td>
                   <td className="text-center">
                     <a href={`/service/${departure.date}/${departure.id}`}>
                       {formatTime(departure)}

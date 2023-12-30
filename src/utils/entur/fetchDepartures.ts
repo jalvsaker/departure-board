@@ -24,6 +24,8 @@ export async function fetchDepartures(station: string) {
             }
             quay {
               publicCode
+              latitude
+              longitude
             }
             realtime
             expectedDepartureTime
@@ -69,7 +71,11 @@ export async function fetchDepartures(station: string) {
         expectedDepartureTime,
         aimedDepartureTime,
         minutes,
-        platform: departure.quay.publicCode,
+        platform: {
+          code: departure.quay.publicCode,
+          latitude: departure.quay.latitude,
+          longitude: departure.quay.longitude,
+        },
         mode: departure.serviceJourney.line.transportMode,
         date: departure.date,
       };
@@ -90,7 +96,11 @@ export interface Departure {
   expectedDepartureTime: Date;
   aimedDepartureTime: Date;
   minutes: number;
-  platform: string;
+  platform: {
+    code: string;
+    latitude: number;
+    longitude: number;
+  };
   mode: string;
   date: string;
 }
