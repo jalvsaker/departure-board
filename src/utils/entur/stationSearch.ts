@@ -2,13 +2,14 @@ import { ET_CLIENT_NAME } from "./common";
 
 export async function stationSearch(
   search: string,
-  abortController: AbortController,
+  amount: number = 1,
+  abortController?: AbortController,
 ) {
   try {
     const res = await fetch(
-      `https://api.entur.io/geocoder/v1/autocomplete?text=${search}&size=20&lang=no&boundary.country=NOR&layers=venue`,
+      `https://api.entur.io/geocoder/v1/autocomplete?text=${search}&size=${amount}&lang=no&boundary.country=NOR&layers=venue`,
       {
-        signal: abortController.signal,
+        signal: abortController?.signal,
         headers: { "ET-Client-Name": ET_CLIENT_NAME },
       },
     );

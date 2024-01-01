@@ -10,7 +10,7 @@ export function StationSearch() {
       setResults([]);
       return;
     }
-    const places = await stationSearch(search, abortController);
+    const places = await stationSearch(search, 20, abortController);
     if (!places || abortController.signal.aborted) return;
     setResults(places);
   }
@@ -32,10 +32,11 @@ export function StationSearch() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} method="POST" action="/api/search">
         <input
           placeholder="Station"
           className="text-center border-y w-full p-1 dark:bg-black dark:border-gray-800 outline-none"
+          name="search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
