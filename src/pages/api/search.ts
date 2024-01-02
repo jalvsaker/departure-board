@@ -1,6 +1,8 @@
 import { type APIRoute } from "astro";
 import { stationSearch } from "../../utils/entur/stationSearch";
 
+export const prerender = false;
+
 export const POST: APIRoute = async ({ request, redirect }) => {
   const search = (await request.formData()).get("search") as string;
 
