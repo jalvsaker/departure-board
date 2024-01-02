@@ -1,9 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { StationSearch } from "../components/StationSearch";
+import { NearbyStations } from "../components/NearbyStations";
 ---
 
 <Layout title="Departure Board">
   <h1 class="text-3xl text-center py-2">Departure Board</h1>
   <StationSearch client:load />
+  <NearbyStations client:load />
 </Layout>

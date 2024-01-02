@@ -41,16 +41,18 @@ export function StationSearch() {
           onChange={(e) => setSearch(e.target.value)}
         />
       </form>
-      <ul>
-        {results.map((place) => (
-          <li
-            key={place.id}
-            className="text-center first:font-semibold odd:bg-gray-100 dark:odd:bg-gray-900"
-          >
-            <a href={`/station/${place.id}`}>{place.name}</a>
-          </li>
-        ))}
-      </ul>
+      {results.length > 0 && (
+        <ul className="absolute w-full bg-white dark:bg-gray-950 border-b dark:border-b-gray-900">
+          {results.map((place) => (
+            <li
+              key={place.id}
+              className="text-center first:font-semibold odd:bg-gray-100 dark:odd:bg-gray-900"
+            >
+              <a href={`/station/${place.id}`}>{place.name}</a>
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 }
