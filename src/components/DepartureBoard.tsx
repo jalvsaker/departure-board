@@ -104,9 +104,9 @@ export function DepartureBoard({
                       href={`https://www.google.com/maps/search/?api=1&query=${departure.platform.latitude}%2C${departure.platform.longitude}`}
                     >
                       {departure.platform.code || (
-                        <div className="flex justify-center">
+                        <span className="flex justify-center">
                           <FaLocationDot />
-                        </div>
+                        </span>
                       )}
                     </a>
                   </td>
