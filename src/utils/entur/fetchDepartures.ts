@@ -44,7 +44,7 @@ export async function fetchDepartures(station: string) {
 
   const json = await res.json();
 
-  if (json.data.stopPlace === null) {
+  if (!json.data?.stopPlace) {
     return undefined;
   }
 

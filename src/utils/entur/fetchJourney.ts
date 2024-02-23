@@ -41,7 +41,7 @@ export async function fetchJourney(id: string, date: string) {
 
   const json = await res.json();
 
-  if (json.data.serviceJourney === null) {
+  if (!json.data?.serviceJourney) {
     return undefined;
   }
 
